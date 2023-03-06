@@ -2,22 +2,28 @@ import java.util.ArrayList;
 
 public class Order {
 	private final int id;
-	private double totalPrice;
 	private ArrayList<Item> items = new ArrayList<Item>();
+	private ArrayList<Integer> quantities;
+	private double totalPrice;
 
 	public Order(int id){
 		this.id = id;
 	}
 	public void addItem(Item item, double price, int quantity){
-		items.add(new Item(item.getName(), price, quantity));
+		items.add(new Item(item.getName(), item.getPrice()));
+		quantities.add(quantity);
 	}
-	public void removeItem(int index, int quantity){
+	public void removeItem(int index) throws IndexOutOfBoundsException {
 		items.remove(index);
+		quantities.remove(index);
 	}
-	public void editQuantity(Item item, int index, int quantity){
-		Item.setQuantity(item, quantity);
+
+	public void editItem(int index, Item item){
+		items.set(index, item);
 	}
-// TODO - Make sure editQuantity takes in an item from ArrayList as an argument
+	public void editQuantity(int index, int quantity) throws IndexOutOfBoundsException {
+		quantities.set(index, quantity);
+	}
 	public int getId() {
 		return id;
 	}
