@@ -1,0 +1,48 @@
+Part-1 [50pts]: Show food menu, take order, and confirm order.
+1.1: Create a simple user interface (e.g., in console) to show a simplified menu to allow customers
+to make order. To limit the scope of the problem, the menu should include three different types of
+foods (e.g., burgers, fries, drinks), and each type of foods should have three options (e.g., burgers:
+chicken, fish, beef; fries: small, medium, and large; drinks: coffee, soda, juice). Each type of foods
+and food options should have slightly different prices. System assumption: customers will always
+make an order based on the menu, can not quit. Each customer can order more than one food in
+each type (e.g., a customer can order: 2 chicken burger, 1 beef burger, 3 medium fries, and 2
+coffees).
+
+Note: students are required to provide the details on the menu design in their project design and
+implementation document such as types of foods, food options in each type, and prices.
+
+1.2: After taking an order from a customer, the program will print out an order summary (i.e., a bill
+shows the foods that user ordered, the prices and the total amount) to let the customer double
+check and confirm the order. System assumptions: customers are allowed to modify their orders by
+using the same ordering process (i.e., reorder everything). Customers are allowed to go to next
+process (i.e., payment process) only after they confirmed order. Customers can not quit in this
+ordering confirmation process.
+
+Part-2 [50pts]: Accept payment from customers.
+2.1: Customers can make payment by using credit card, or cash. System assumptions: If customers
+pay by credit card means they pay exactly the bill amount. If they pay by cash, then your application
+will calculate the changes, and show changes to customers. System assumption: If customers do not
+have enough money to make payment, they are allowed to cancel the order, and quit. Your
+application should go back to part-1 to accept food ordering from a new customer.
+
+2.2: To simulate this payment process, your application may create a user interface or use console
+to ask a customer to choose payment method, and enter payment amount if he/she pays by cash.
+
+Part-3 [50pts]: Generate summary statistics and display a summary report.
+3.1: Your application should also be able to print out a summary report in console as well as in a
+text file when no more order will be taken (e.g., at the end of the day, when fast food restaurant
+closes). System assumption: no time dimension will be considered in this project such as when to
+start the application, when to end the application, how long it takes to process each order etc.
+
+3.2: The summary report should include two parts:
+
+Part-1: The details of each order including: (1) order id/number, (2) order status (i.e., processed or
+cancelled), and if the order is processed successfully, then food order details: (3) which food(s)
+ordered, (4) how many of each, (5) total dollar amount before tax, (6) tax amount, (7) total billing
+amount (including tax), (8) paid by credit card or by cash.
+
+Part-2: The summary statistics including: number of orders taken (e.g., total: 10 orders), (2) number
+of orders processed (e.g., 9 orders were processed), (3) number orders cancelled if have any (e.g., 1
+order got cancelled), (4) total billing amount of all orders, and (5) food ordering statistics: how many
+each type of food ordered (e.g., burgers: 4 chicken, 10 beef, 3 fish; fries: 6 medium, 3 large, 4 small;
+drinks: 10 soda, 8 coffee, 3 juice).
