@@ -58,7 +58,7 @@ public class Main {
 	}
 
 	private static void processPayment(Scanner input, Order order, Item[] mains, Item[] sides, Item[] drinks) {
-		int paymentMethod = 0;
+		int paymentMethod;
 		double payment = 0;
 		double change;
 		do{
@@ -239,6 +239,7 @@ public class Main {
 			}
 		}
 	}
+
 	public static int quantityInputValidation(Scanner input, String question, int value1) {
 		int userInput = 0;
 		while (true) {
