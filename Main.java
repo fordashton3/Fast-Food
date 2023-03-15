@@ -6,7 +6,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		Scanner input = new Scanner(System.in);
 		int id = 1;
-		int user = 0;
+		int user;
 		Order order;
 		Item[] entrees = initializeEntree();
 		Item[] sides = initializeSides();
@@ -16,7 +16,7 @@ public class Main {
 		do {
 			order = new Order(id);
 			order = orderLoop(input, entrees, sides, drinks, order);
-			user = inputValidation(input, user, "1) Proceed to Payment%n2) Edit Order%n3) Restart Order%n", 1, 3);
+			user = inputValidation(input,"1) Proceed to Payment%n2) Edit Order%n3) Restart Order%n", 1, 3);
 			switch (user) {
 				case 1 -> {
 					processPayment(input, order, entrees, sides, drinks);
@@ -27,7 +27,7 @@ public class Main {
 				case 3 -> order = null;
 			}
 			if (order != null) {
-				user = inputValidation(input, user, "1) Place New Order%n0) Exit%n", 0, 1);
+				user = inputValidation(input,"1) Place New Order%n0) Exit%n", 0, 1);
 			}
 		} while (user != 0);
 		writeStats(entrees, sides, drinks);
@@ -58,24 +58,29 @@ public class Main {
 	}
 
 	private static void processPayment(Scanner input, Order order, Item[] mains, Item[] sides, Item[] drinks) {
-		System.out.printf("Payment Method: %n1) Cash%n2) Card%n");
 		int paymentMethod = 0;
 		double payment = 0;
-		double change = 0;
-		paymentMethod = inputValidation(input, paymentMethod, "Payment Method: %n1) Cash%n2) Card%n", 1, 2);
-		switch (paymentMethod) {
-			case 1 -> payment = paymentInputValidation(input, payment, "Enter a decimal number", 0);
-			case 2 -> payment = order.getTotal();
-		}
-		if (payment >= order.getTotal()) {
-			change = payment - order.getTotal();
-			System.out.printf("Your change is: $%.2f%nEnjoy your food!%n%n", change);
-			calcStats(order, mains);
-			calcStats(order, sides);
-			calcStats(order, drinks);
-		} else {
-			System.out.printf("Insufficient funds: Order Cancelled%n");
-		}
+		double change;
+		do{
+			paymentMethod = inputValidation(input, "Payment Method: %n1) Cash%n2) Card%n", 1, 2);
+			switch (paymentMethod) {
+				case 1 -> payment = paymentInputValidation(input, payment, "Enter a decimal number", 0);
+				case 2 -> payment = order.getTotal();
+			}
+			if (payment >= order.getTotal()) {
+				change = payment - order.getTotal();
+				System.out.printf("Your change is: $%.2f%nEnjoy your food!%n%n", change);
+				calcStats(order, mains);
+				calcStats(order, sides);
+				calcStats(order, drinks);
+			} else {
+				System.out.printf("Insufficient funds: Would you like to cancel your order?%n0) Yes%n1) No");
+				paymentMethod = inputValidation(input, "Insufficient funds: Would you like to cancel your order?%n", 1, 2);
+				if (paymentMethod == 1) {
+					input.nextLine();
+				}
+			}
+		} while (paymentMethod != 0);
 	}
 
 	private static void calcStats(Order order, Item[] items) {
@@ -126,36 +131,16 @@ public class Main {
 	}
 
 	public static Order orderLoop(Scanner input, Item[] entrees, Item[] sides, Item[] drinks, Order order) throws InputMismatchException {
-		int user = 0;
+		int user;
 		while (true) {
-			System.out.println("\tEntrees");
-			System.out.println("\tSides");
-			System.out.println("\tDrinks");
-
-			do {
-				try {
-					System.out.println("Select category of choice:");
-					user = input.nextLine().charAt(0);
-				} catch (InputMismatchException e) {
-					System.out.println("Invalid Character");
-				} catch (IndexOutOfBoundsException e) {
-					System.out.println("Index is out of bounds for category name");
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
-
-			} while (user < 1 || user > 3);
+			System.out.printf("1) \tEntrees%n2) \tSides%n3) \tDrinks%n");
 			// Allows the user to choose category of food
-
+			user = inputValidation(input, "Select category of choice:", 1, 3);
 			switch (user) {
 				case 1 -> {
 					printCategory(entrees);
 					order = selectItem(order, entrees, input);
-					System.out.print("Would you like to make that a meal? ");
-					do {
-						System.out.printf("  1)  Yes%n  2)  No%n");
-						user = inputValidation(input, user, "  1)  Yes%n  2)  No%n", 1, 2	);
-					} while (user != 1 && user !=2);
+					user = inputValidation(input, "Would you like to make that a meal?%n1) Yes%n2) No", 1, 2	);
 					if (user == 1) {
 						printCategory(sides);
 						order = selectItem(order, sides, input);
@@ -250,20 +235,9 @@ public class Main {
 	}
 
 	public static Order selectItem(Order order, Item[] items, Scanner input) throws InputMismatchException {
-		int user;
-		do {
-			System.out.print("Input a number corresponding with your chosen item: ");
-			user = input.nextInt();
-		} while (user <= 0 || user > items.length);
-		int item = user;
-		System.out.println("How many do you want?");
-		user = input.nextInt();
-		while (user <= 0) {
-			System.out.print("Input a whole number");
-			user = input.nextInt();
-		}
-		order.addItem(items[item - 1], user);
-		//items[item - 1].setStat(items[item - 1].getStat() + 1);
+		int item = inputValidation(input, "Input a number corresponding with your chosen item: ", 1, items.length) - 1;
+		int quantity = inputValidation(input, "How many do you want?%n", 0, 3);
+		order.addItem(items[item], quantity);
 		return order;
 	}
 
