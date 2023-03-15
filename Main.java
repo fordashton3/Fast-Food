@@ -1,11 +1,8 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-	private static final double TAX_RATE = 0.05; // 5% tax rate
-
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		int id = 1;
@@ -38,7 +35,7 @@ public class Main {
 					System.out.println("Input Mismatch Exception: Must be an Integer");
 				}
 				while (true) {
-					System.out.printf("1) Confirm Finish Order%n2) Edit Order%n3) Restart Order%n");
+					System.out.printf("1) Proceed to Payment%n2) Edit Order%n3) Restart Order%n");
 					user = input.nextLine();
 					try {
 						if (Integer.parseInt(user) == 1) {
@@ -55,26 +52,15 @@ public class Main {
 				}
 				try {
 					if (Integer.parseInt(user) != 3) {
-						// Print out invoice
 						id++;
-						order.printInvoice();
-						System.out.println("Submit your payment amount:");
-						double payment = 0;
-						do {
-							try {
-								System.out.println("Enter a decimal number");
-								payment = input.nextDouble();
-							} catch (InputMismatchException e) {
-								System.out.println("Enter a Decimal Value for Payment");
-								input.nextLine();
-							}
-						} while (!(payment > 0));
-						proccessPayment(payment, order);
+						if (order != null) {
+							order.printInvoice();
+						}
+						proccessPayment(input, order, entrees, sides, drinks);
 					}
 				} catch (InputMismatchException | NumberFormatException e) {
 					System.out.println(e.getMessage());
 				}
-				// TODO - add a statement to break into next loop
 				do {
 					System.out.printf("1) Place Another Order%n2) Exit%n");
 					try {
@@ -89,7 +75,7 @@ public class Main {
 				}
 			}
 			do {
-				System.out.printf("1) Place Order%n2) Exit Program%n");
+				System.out.printf("1) Place New Order%n2) Exit Program%n");
 				try {
 					exit = input.nextInt();
 				} catch (InputMismatchException e) {
@@ -100,6 +86,11 @@ public class Main {
 			if (exit == 2) {
 				break;
 			}
+		}
+		try {
+			writeStats(entrees, sides, drinks);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -202,6 +193,8 @@ public class Main {
 					user = Character.toString(input.nextLine().charAt(0));
 				} catch (InputMismatchException e) {
 					System.out.println("Invalid Character");
+				} catch (IndexOutOfBoundsException e) {
+					System.out.println("Index is out of bounds for category name");
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
@@ -255,7 +248,6 @@ public class Main {
 				break;
 			}
 		}
-
 		return order;
 	}
 
@@ -267,6 +259,15 @@ public class Main {
 		int userInput = 0;
 		System.out.println("Choose item to edit: ");
 		index = input.nextInt() - 1;
+		try {
+			while (order.getItems().get(index).getName().equalsIgnoreCase("meal")) {
+				System.out.println("Quantity Meal cannot be changed. Select a different item.");
+				index = input.nextInt()-1;
+			}
+		} catch (InputMismatchException e) {
+			input.nextLine();
+			System.out.println("Enter an Integer");
+		}
 		while (true) {
 			input.nextLine();
 			System.out.printf("1. Quantity%n2. Delete Item%n");
@@ -297,38 +298,9 @@ public class Main {
 		}
 	}
 
-	public static void printOrder(Order order, Item[] entrees, Item[] sideDishes, Item[] drinks) {
-		System.out.println("Order #" + order.getId());
-		System.out.println("==========================");
-
-		System.out.println("Entrees:");
-		printLoop(order, entrees);
-
-		System.out.println("Sides:");
-		printLoop(order, sideDishes);
-
-		System.out.println("Drinks:");
-		printLoop(order, drinks);
-
-		System.out.printf("%10s $%.2f%n", "Subtotal:", order.getSubtotal());
-		System.out.printf("%10s $%.2f%n", "Tax:", order.getTax());
-		System.out.printf("%10s $%.2f%n", "Total:", order.getTotal());
-		System.out.println("==========================\n");
-	}
-
-	// TODO - add tax calculations and printout
 	public static void printCatagory(Item[] items) {
 		for (int i = 0; i < items.length; i++) {
 			System.out.printf("%d)\t%s%n", i + 1, items[i].getName());
-		}
-	}
-
-	public static void printLoop(Order order, Item[] items) {
-		for (int i = 0; i < order.getItems().size(); i++) {
-			Item item = order.getItems().get(i);
-			if (Arrays.asList(items).contains(item)) {
-				System.out.println("\t- " + item.getName() + " (x" + order.getQuantities().get(i) + "): $" + item.getPrice());
-			}
 		}
 	}
 
@@ -349,9 +321,4 @@ public class Main {
 		//items[item - 1].setStat(items[item - 1].getStat() + 1);
 		return order;
 	}
-
-	/*public static boolean inputValidation(String input, String lett1, String lett2, String lett3) {
-		input = Character.toString(input.charAt(0));
-		return input.equalsIgnoreCase(lett1) || input.equalsIgnoreCase(lett2) || input.equalsIgnoreCase(lett3);
-	}*/
 }

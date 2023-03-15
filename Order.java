@@ -61,7 +61,11 @@ public class Order {
 		System.out.println("------------------------------");
 		for (int i = 0; i < items.size(); i++) {
 			//System.out.println(items.get(i).getName() + "\t" + quantities.get(i) + "\t\t\t$" + items.get(i).getPrice());
-			System.out.printf("%2d)\t%13s: %-2d  $%.2f\t%n", i + 1, items.get(i).getName(),quantities.get(i), items.get(i).getPrice());
+			if (items.get(i).getName().equalsIgnoreCase("meal")){
+				System.out.printf("    \t%13s: %-2d  $%.2f\t%n", items.get(i).getName(),quantities.get(i), items.get(i).getPrice());
+			} else {
+				System.out.printf("%2d)\t%13s: %-2d  $%.2f\t%n", i + 1, items.get(i).getName(),quantities.get(i), items.get(i).getPrice());
+			}
 		}
 		System.out.println("------------------------------");
 		System.out.printf("%10s $%.2f%n", "Subtotal:", getSubtotal());
