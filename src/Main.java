@@ -141,24 +141,24 @@ public class Main {
 			switch (user) {
 				case 1 -> {
 					printCategory(entrees);
-					order = selectItem(order, entrees, input);
+					selectItem(order, entrees, input);
 					user = inputValidation(input, "Would you like to make that a meal?%n1) Yes%n2) No", 1, 2);
 					if (user == 1) {
 						printCategory(sides);
-						order = selectItem(order, sides, input);
+						selectItem(order, sides, input);
 						printCategory(drinks);
-						order = selectItem(order, drinks, input);
+						selectItem(order, drinks, input);
 						Item mealDiscount = new Item("Meal", -2);
 						order.addItem(mealDiscount, 1);
 					}
 				}
 				case 2 -> {
 					printCategory(sides);
-					order = selectItem(order, sides, input);
+					selectItem(order, sides, input);
 				}
 				case 3 -> {
 					printCategory(drinks);
-					order = selectItem(order, drinks, input);
+					selectItem(order, drinks, input);
 				}
 			}
 			System.out.println("Item added to order.");
@@ -220,11 +220,10 @@ public class Main {
 		}
 	}
 
-	public static Order selectItem(Order order, Item[] items, Scanner input) throws InputMismatchException {
+	public static void selectItem(Order order, Item[] items, Scanner input) throws InputMismatchException {
 		int item = inputValidation(input, "Input a number corresponding with your chosen item: ", 1, items.length) - 1;
 		int quantity = inputValidation(input, "How many do you want?%n", 0, 3);
 		order.addItem(items[item], quantity);
-		return order;
 	}
 
 	public static int inputValidation(Scanner input, String question, int value1, int value2) {
@@ -237,7 +236,7 @@ public class Main {
 				input.nextLine();
 				System.out.println("Enter an positive Integer");
 			}
-			if (!(userInput >= value1 && userInput <= value2)) {
+			if (userInput >= value1 && userInput <= value2) {
 				return userInput;
 			}
 		}

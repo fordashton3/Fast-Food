@@ -1,7 +1,5 @@
 package src;
 
-import java.text.Format;
-
 public class Item {
 	private final String name;
 	private final double price;
