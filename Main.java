@@ -241,7 +241,8 @@ public class Main {
 		return order;
 	}
 
-	public static int inputValidation(Scanner input, int userInput, String question, int value1, int value2) {
+	public static int inputValidation(Scanner input, String question, int value1, int value2) {
+		int userInput = 0;
 		while (true) {
 			System.out.printf(question);
 			try {
