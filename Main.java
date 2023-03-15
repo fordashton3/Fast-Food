@@ -16,7 +16,7 @@ public class Main {
 		do {
 			order = new Order(id);
 			orderLoop(input, entrees, sides, drinks, order);
-			user = inputValidation(input,"1) Proceed to Payment%n2) Edit Order%n3) Restart Order%n", 1, 3);
+			user = inputValidation(input,"-------- Order Options --------%n1) Proceed to Payment%n2) Edit Order%n3) Restart Order%n", 1, 3);
 			switch (user) {
 				case 1 -> {
 					processPayment(input, order, entrees, sides, drinks);
@@ -64,7 +64,7 @@ public class Main {
 		do{
 			paymentMethod = inputValidation(input, "Payment Method: %n1) Cash%n2) Card%n", 1, 2);
 			switch (paymentMethod) {
-				case 1 -> payment = paymentInputValidation(input, payment, "Enter a decimal number", 0);
+				case 1 -> payment = paymentInputValidation(input,"Cash Amount: ", 0);
 				case 2 -> payment = order.getTotal();
 			}
 			if (payment >= order.getTotal()) {
@@ -133,14 +133,14 @@ public class Main {
 	public static void orderLoop(Scanner input, Item[] entrees, Item[] sides, Item[] drinks, Order order) throws InputMismatchException {
 		int user;
 		do {
-			System.out.printf("  1) \tEntrees%n  2) \tSides%n  3) \tDrinks%n");
+			System.out.printf("------ Menu ------%n1) Entrees%n2) Sides%n3) Drinks%n");
 			// Allows the user to choose category of food
 			user = inputValidation(input, "Select category of choice: ", 1, 3);
 			switch (user) {
 				case 1 -> {
 					printCategory(entrees, "Entrees");
 					selectItem(order, entrees, input);
-					user = inputValidation(input, "Would you like to make that a meal?%n1) Yes%n2) No", 1, 2);
+					user = inputValidation(input, "Would you like to make that a meal?%n1) Yes%n2) No%n", 1, 2);
 					if (user == 1) {
 						printCategory(sides, "Sides");
 						selectItem(order, sides, input);
@@ -151,16 +151,16 @@ public class Main {
 					}
 				}
 				case 2 -> {
-					printCategory(sides);
+					printCategory(sides, "Sides");
 					selectItem(order, sides, input);
 				}
 				case 3 -> {
-					printCategory(drinks);
+					printCategory(drinks, "Drinks");
 					selectItem(order, drinks, input);
 				}
 			}
 			System.out.println("Item added to order.");
-			user = inputValidation(input, "1) Continue%n0) Finish Order%n", 1, 2);
+			user = inputValidation(input, "1) Continue%n0) Finish Order%n", 0, 1);
 		} while (user != 0);
 	}
 
@@ -212,7 +212,7 @@ public class Main {
 	}
 
 	public static void printCategory(Item[] items, String category) {
-		System.out.printf("%s: ", category);
+		System.out.printf("%5s%7s%-5s%n", "-".repeat(8), category, "-".repeat(8));
 		for (int i = 0; i < items.length; i++) {
 			System.out.printf("%d)\t%s%n", i + 1, items[i].getName());
 		}
@@ -254,7 +254,9 @@ public class Main {
 			}
 		}
 	}
-	public static double paymentInputValidation(Scanner input, double userInput, String question, int value1) {
+
+	public static double paymentInputValidation(Scanner input, String question, int value1) {
+		userInput = 0;
 		while (true) {
 			System.out.printf(question);
 			try {
