@@ -3,10 +3,12 @@ import java.text.Format;
 public class Item {
 	private String name;
 	private double price;
+	private int stat;
 
 	public Item(String name, double price) {
 		this.name = name;
 		this.price = price;
+		stat = 0;
 	}
 
 	public String getName() {
@@ -17,12 +19,12 @@ public class Item {
 		return price;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public int getStat() {
+		return stat;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+	public void setStat(int stat) {
+		this.stat = stat;
 	}
 
 	public String toString() {

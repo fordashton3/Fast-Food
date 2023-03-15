@@ -1,0 +1,15 @@
+Nacho Daddy: Order Summary and Statistics
+		Entrees
+Nacho Grande     :  50
+Crunch-wrap      :   0
+Taco Box         :   0
+-------------------------
+		Sides
+Fries            :   0
+Taco             :   0
+Side Nachos      :   0
+-------------------------
+		Drinks
+Coffee           :   0
+Water            :   0
+Soda             :   0

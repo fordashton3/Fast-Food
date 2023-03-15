@@ -24,11 +24,7 @@ public class Order {
 		return quantities;
 	}
 
-	public void editItem(Item item, int index){
-		items.set(index, item);
-	}
-
-	public void editQuantity(int quantity, int index) throws IndexOutOfBoundsException {
+	public void editQuantity(int index, int quantity) throws IndexOutOfBoundsException {
 		quantities.set(index, quantity);
 	}
 
