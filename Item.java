@@ -1,5 +1,3 @@
-package src;
-
 public class Item {
 	private final String name;
 	private final double price;

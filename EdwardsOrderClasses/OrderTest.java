@@ -39,10 +39,10 @@ public class OrderTest {
                         break;
                     }
                 }
-                System.out.println("src.Order " + (i + 1));
+                System.out.println("Order " + (i + 1));
                 System.out.println("------------------------------");
 
-                System.out.println("src.src.Main Dish Options:");
+                System.out.println("src.Main Dish Options:");
                 for (int j = 0; j < mainDishes.size(); j++) {
                     System.out.println((j + 1) + ". " + mainDishes.get(j) + " ($" + mainDishPrices.get(j) + ")");
                 }

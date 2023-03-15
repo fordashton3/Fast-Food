@@ -1,5 +1,3 @@
-package src;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -57,7 +55,7 @@ public class Order {
 
 	public void printInvoice() {
 		DecimalFormat df = new DecimalFormat("#.##");
-		System.out.println("src.Order ID: " + id);
+		System.out.println("Order ID: " + id);
 		System.out.println("------------------------------");
 		System.out.println("Food\tQuantity\tUnit Price");
 		System.out.println("------------------------------");
