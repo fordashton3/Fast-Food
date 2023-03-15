@@ -17,7 +17,7 @@ public class Main {
 
 		do {
 			order = new Order(id);
-			order = orderLoop(input, entrees, sides, drinks, order);
+			orderLoop(input, entrees, sides, drinks, order);
 			user = inputValidation(input,"1) Proceed to Payment%n2) Edit Order%n3) Restart Order%n", 1, 3);
 			switch (user) {
 				case 1 -> {
@@ -132,7 +132,7 @@ public class Main {
 		writer.close();
 	}
 
-	public static Order orderLoop(Scanner input, Item[] entrees, Item[] sides, Item[] drinks, Order order) throws InputMismatchException {
+	public static void orderLoop(Scanner input, Item[] entrees, Item[] sides, Item[] drinks, Order order) throws InputMismatchException {
 		int user;
 		do {
 			System.out.printf("1) \tEntrees%n2) \tSides%n3) \tDrinks%n");
@@ -164,7 +164,6 @@ public class Main {
 			System.out.println("Item added to order.");
 			user = inputValidation(input, "1) Continue%n0) Finish Order%n", 1, 2);
 		} while (user != 0);
-		return order;
 	}
 
 	private static void editOrder(Scanner input, Order order) throws InputMismatchException {
