@@ -1,4 +1,4 @@
-package Main2;
+package src;
 
 import java.io.*;
 import java.util.InputMismatchException;
@@ -24,7 +24,7 @@ public class Main2 {
             } catch (InputMismatchException e) {
                 System.out.println("Input Mismatch Exception: Must be an Integer");
             }
-            user = inputValidation(input, user, "1) Confirm Finish Order%n2) Edit Order%n3) Restart Order%n", 1, 3);
+            user = inputValidation(input, user, "1) Confirm Finish src.Order%n2) Edit src.Order%n3) Restart src.Order%n", 1, 3);
             switch (user) {
                 case 1 -> input.nextLine();
                 case 2 -> editOrder(input, order);
@@ -46,8 +46,8 @@ public class Main2 {
                 } while (!(payment > 0));
                 processPayment(input, order, entrees, sides, drinks);
             }
-                System.out.printf("1) Place Another Order%n2) Exit%n");
-                user = inputValidation(input, user, "1) Place New Order%n2) Exit%n", 1, 2);
+                System.out.printf("1) Place Another src.Order%n2) Exit%n");
+                user = inputValidation(input, user, "1) Place New src.Order%n2) Exit%n", 1, 2);
                 if (user == 2) {
                     break;
                 }
@@ -113,7 +113,7 @@ public class Main2 {
             calcStats(order, sides);
             calcStats(order, drinks);
         } else {
-            System.out.printf("Insufficient funds: Order Cancelled%n");
+            System.out.printf("Insufficient funds: src.Order Cancelled%n");
         }
     }
 
@@ -130,7 +130,7 @@ public class Main2 {
     public static void writeStats(Item[] entrees, Item[] sides, Item[] drinks) throws IOException {
         File file = new File("Summary Statistics.txt");
         PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file)));
-        writer.println("Nacho Daddy: Order Summary and Statistics");
+        writer.println("Nacho Daddy: src.Order Summary and Statistics");
         writer.println("\t\tEntrees");
         for (Item entree : entrees) {
             writer.printf("%-17s: %3d%n", entree.getName(), entree.getStat());
@@ -146,7 +146,7 @@ public class Main2 {
             writer.printf("%-17s: %3d%n", drink.getName(), drink.getStat());
         }
         // =========================
-        System.out.println("Nacho Daddy: Order Summary and Statistics");
+        System.out.println("Nacho Daddy: src.Order Summary and Statistics");
         System.out.println("\t\tEntrees");
         for (Item entree : entrees) {
             System.out.printf("%-17s: %3d%n", entree.getName(), entree.getStat());
@@ -211,8 +211,8 @@ public class Main2 {
                     order = selectItem(order, drinks, input);
                 }
             }
-            System.out.println("Item added to order.");
-            System.out.printf("1) Continue%n2) Finish Order%n");
+            System.out.println("src.Item added to order.");
+            System.out.printf("1) Continue%n2) Finish src.Order%n");
             int temp;
             while (true) {
                 try {
@@ -235,7 +235,7 @@ public class Main2 {
 
     private static void editOrder(Scanner input, Order order) throws InputMismatchException {
         int index;
-        System.out.println("Current Order:");
+        System.out.println("Current src.Order:");
         System.out.println();
         order.printInvoice();
         int userInput;
@@ -243,7 +243,7 @@ public class Main2 {
         index = input.nextInt() - 1;
         while (true) {
             input.nextLine();
-            System.out.printf("1. Quantity%n2. Delete Item%n");
+            System.out.printf("1. Quantity%n2. Delete src.Item%n");
             userInput = input.nextInt();
             if (userInput == 1) {
                 try {
@@ -254,12 +254,12 @@ public class Main2 {
                 }
                 break;
             } else if (userInput == 2) {
-                System.out.println("1. Confirm Item Deletion%n2. Cancel Deletion");
+                System.out.println("1. Confirm src.Item Deletion%n2. Cancel Deletion");
                 userInput = input.nextInt();
                 if (userInput == 1) {
                     order.removeItem(index);
 
-                    System.out.println("Item Deleted");
+                    System.out.println("src.Item Deleted");
                     break;
                 } else if (userInput == 2) {
                     System.out.println("Cancelled");
