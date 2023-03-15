@@ -142,9 +142,9 @@ public class Main {
 					selectItem(order, entrees, input);
 					user = inputValidation(input, "Would you like to make that a meal?%n1) Yes%n2) No", 1, 2);
 					if (user == 1) {
-						printCategory(sides);
+						printCategory(sides, "Sides");
 						selectItem(order, sides, input);
-						printCategory(drinks);
+						printCategory(drinks, "Drinks");
 						selectItem(order, drinks, input);
 						Item mealDiscount = new Item("Meal", -2);
 						order.addItem(mealDiscount, 1);
@@ -194,7 +194,7 @@ public class Main {
 				}
 				break;
 			} else if (userInput == 2) {
-				System.out.println("1. Confirm Item Deletion%n2. Cancel Deletion");
+				System.out.println("1. Confirm Item Deletion%n2. Cancel Deletion%n");
 				userInput = input.nextInt();
 				if (userInput == 1) {
 					order.removeItem(index);
@@ -211,7 +211,8 @@ public class Main {
 		}
 	}
 
-	public static void printCategory(Item[] items) {
+	public static void printCategory(Item[] items, String category) {
+		System.out.printf("%s: ", category);
 		for (int i = 0; i < items.length; i++) {
 			System.out.printf("%d)\t%s%n", i + 1, items[i].getName());
 		}
@@ -219,7 +220,7 @@ public class Main {
 
 	public static void selectItem(Order order, Item[] items, Scanner input) throws InputMismatchException {
 		int item = inputValidation(input, "Input a number corresponding with your chosen item: ", 1, items.length) - 1;
-		int quantity = inputValidation(input, "How many do you want?%n", 0, 3);
+		int quantity = quantityInputValidation(input, "How many do you want?%n", 1);
 		order.addItem(items[item], quantity);
 	}
 
@@ -234,6 +235,21 @@ public class Main {
 				System.out.println("Enter an positive Integer");
 			}
 			if (userInput >= value1 && userInput <= value2) {
+				return userInput;
+			}
+		}
+	}
+	public static int quantityInputValidation(Scanner input, String question, int value1) {
+		int userInput = 0;
+		while (true) {
+			System.out.printf(question);
+			try {
+				userInput = input.nextInt();
+			} catch (InputMismatchException e) {
+				input.nextLine();
+				System.out.println(" Error: Enter a positive integer");
+			}
+			if (userInput >= value1) {
 				return userInput;
 			}
 		}
