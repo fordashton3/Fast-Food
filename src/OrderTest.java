@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -51,7 +53,7 @@ public class OrderTest {
 		// Print out invoice/receipt for each order
 		for (Order order : orders) {
 			double subtotal = 0;
-			System.out.println("Order ID: " + order.getId());
+			System.out.println("src.Order ID: " + order.getId());
 			System.out.println("Items:");
 			for (int i = 0; i < order.getItems().size(); i++) {
 				Item item = order.getItems().get(i);
@@ -91,7 +93,7 @@ public class OrderTest {
 				quantity = input.nextInt();
 			}
 			order.addItem(items[user - 1], quantity);
-			System.out.println("Item added to order.");
+			System.out.println("src.Item added to order.");
 		}
 		return order;
 	}
