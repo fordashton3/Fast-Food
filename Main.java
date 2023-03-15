@@ -133,12 +133,12 @@ public class Main {
 	public static void orderLoop(Scanner input, Item[] entrees, Item[] sides, Item[] drinks, Order order) throws InputMismatchException {
 		int user;
 		do {
-			System.out.printf("1) \tEntrees%n2) \tSides%n3) \tDrinks%n");
+			System.out.printf("  1) \tEntrees%n  2) \tSides%n  3) \tDrinks%n");
 			// Allows the user to choose category of food
-			user = inputValidation(input, "Select category of choice:", 1, 3);
+			user = inputValidation(input, "Select category of choice: ", 1, 3);
 			switch (user) {
 				case 1 -> {
-					printCategory(entrees);
+					printCategory(entrees, "Entrees");
 					selectItem(order, entrees, input);
 					user = inputValidation(input, "Would you like to make that a meal?%n1) Yes%n2) No", 1, 2);
 					if (user == 1) {
@@ -179,7 +179,7 @@ public class Main {
 			}
 		} catch (InputMismatchException e) {
 			input.nextLine();
-			System.out.println("Enter an Integer");
+			System.out.println(" Error: Enter an Integer");
 		}
 		while (true) {
 			input.nextLine();
@@ -232,7 +232,7 @@ public class Main {
 				userInput = input.nextInt();
 			} catch (InputMismatchException e) {
 				input.nextLine();
-				System.out.println("Enter an positive Integer");
+				System.out.println(" Error: Enter a positive integer");
 			}
 			if (userInput >= value1 && userInput <= value2) {
 				return userInput;
@@ -261,7 +261,7 @@ public class Main {
 				userInput = input.nextDouble();
 			} catch (InputMismatchException e) {
 				input.nextLine();
-				System.out.println("Enter an positive Integer");
+				System.out.println(" Error: Enter a positive Integer");
 			}
 			if (!(userInput >= value1)) {
 				return userInput;
