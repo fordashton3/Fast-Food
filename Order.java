@@ -1,4 +1,6 @@
-import java.text.DecimalFormat;
+import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class Order {
@@ -54,7 +56,6 @@ public class Order {
 	}
 
 	public void printInvoice() {
-		DecimalFormat df = new DecimalFormat("#.##");
 		System.out.println("Order ID: " + id);
 		System.out.println("------------------------------");
 		System.out.println("Food\tQuantity\tUnit Price");
