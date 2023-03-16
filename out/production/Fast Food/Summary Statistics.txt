@@ -1,18 +1,18 @@
 Nacho Daddy: Order Summary and Statistics
 		Entrees
 Nacho Grande     :   0
-Crunch-wrap      :   2
-Taco Box         :   1
+Crunch-wrap      :   3
+Taco Box         :   0
 -------------------------
 		Sides
-Fries            :   1
-Taco             :   0
-Side Nachos      :  50
+Fries            :   0
+Taco             :   3
+Side Nachos      :   0
 -------------------------
 		Drinks
-Coffee           :   2
-Water            :   0
+Coffee           :   0
+Water            :   1
 Soda             :   1
 ------------------------------
 	Summary
-         Total Orders:  4     Orders Fulfilled:  7     Orders Cancelled:  -3     Orders Fulfilled:  7         Total Billed:  246.150000
+       Total Orders%n:  3   Orders Fulfilled%n:  3   Orders Cancelled%n:  0   Orders Fulfilled%n:  3       Total Billed%n:  29.840000

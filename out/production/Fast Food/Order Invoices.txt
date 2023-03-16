@@ -57,3 +57,33 @@ Food	Quantity	Unit Price
 Fulfilled: true
 ==============================
 
+Order ID: 1
+------------------------------
+Food	Quantity	Unit Price
+------------------------------
+ 1)	  Crunch-wrap: 1   $6.49	
+ 2)	         Taco: 2   $2.99	
+ 3)	        Water: 1   $1.99	
+    	         Meal: 1   $-2.00	
+==============================
+ Subtotal: $12.46
+      Tax: $0.62
+    Total: $13.08
+Fulfilled: true
+==============================
+
+Order ID: 2
+------------------------------
+Food	Quantity	Unit Price
+------------------------------
+ 1)	  Crunch-wrap: 2   $6.49	
+ 2)	         Taco: 1   $2.99	
+ 3)	         Soda: 1   $1.99	
+    	         Meal: 1   $-2.00	
+==============================
+ Subtotal: $15.96
+      Tax: $0.80
+    Total: $16.76
+Fulfilled: true
+==============================
+

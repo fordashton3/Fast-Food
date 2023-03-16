@@ -151,7 +151,7 @@ public class Main {
         }
         writer.println("-".repeat(30));
         writer.println("\tSummary");
-        writer.printf("%21s:  %d", "Total Orders%n ", id);
+        writer.printf("%21s:  %d", "Total Orders%n", id-1);
         writer.printf("%21s:  %d", "Orders Fulfilled%n", fulfilledOrders);
         writer.printf("%21s:  %d", "Orders Cancelled%n", id - fulfilledOrders);
         writer.printf("%21s:  %d", "Orders Fulfilled%n", fulfilledOrders);
@@ -175,7 +175,7 @@ public class Main {
         }
         System.out.println("-".repeat(30));
         System.out.println("\tSummary");
-        System.out.printf("%21s:  %d", "Total Orders", id);
+        System.out.printf("%21s:  %d", "Total Orders", id-1);
         System.out.printf("%21s:  %d", "Orders Fulfilled", fulfilledOrders);
         System.out.printf("%21s:  %d", "Orders Cancelled", id - fulfilledOrders);
         System.out.printf("%21s:  %d", "Orders Fulfilled", fulfilledOrders);
