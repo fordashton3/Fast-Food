@@ -262,12 +262,15 @@ public class Main {
         } while (userInput != 0);
     }
 
-	public static void printCategory(Item[] items, String category) {
-		System.out.printf("%5s%7s%-5s%n", "-".repeat(8), category, "-".repeat(8));
-		for (int i = 0; i < items.length; i++) {
-			System.out.printf("%d)\t%s%n", i + 1, items[i].getName());
-		}
-	}
+    /*
+    Prints all items for a given food category (Ex: Entrees, Sides, Drinks)
+     */
+    public static void printCategory(Item[] items, String category) {
+        System.out.printf("%5s %7s %-5s%n", "-".repeat(8), category, "-".repeat(8));
+        for (int i = 0; i < items.length; i++) {
+            System.out.printf("%d)\t%s%n", i + 1, items[i].getName());
+        }
+    }
 
     /*
     Allows the user to select item they would like to add to their order
@@ -278,37 +281,43 @@ public class Main {
         order.addItem(items[item], quantity);
     }
 
-	public static int inputValidation(Scanner input, String question, int value1, int value2) {
-		int userInput = 0;
-		while (true) {
-			System.out.printf(question);
-			try {
-				userInput = input.nextInt();
-			} catch (InputMismatchException e) {
-				input.nextLine();
-				System.out.println(" Error: Enter a positive integer");
-			}
-			if (userInput >= value1 && userInput <= value2) {
-				return userInput;
-			}
-		}
-	}
+    /*
+    Validates the input for any screen with multiple options
+     */
+    public static int inputValidation(Scanner input, String question, int value1, int value2) {
+        int userInput = 0;
+        while (true) {
+            System.out.printf(question);
+            try {
+                userInput = input.nextInt();
+            } catch (InputMismatchException e) {
+                input.nextLine();
+                System.out.println("!!  Error: Enter a positive integer  !!");
+            }
+            if (userInput >= value1 && userInput <= value2) {
+                return userInput;
+            }
+        }
+    }
 
-	public static int quantityInputValidation(Scanner input, String question, int value1) {
-		int userInput = 0;
-		while (true) {
-			System.out.printf(question);
-			try {
-				userInput = input.nextInt();
-			} catch (InputMismatchException e) {
-				input.nextLine();
-				System.out.println(" Error: Enter a positive integer");
-			}
-			if (userInput >= value1) {
-				return userInput;
-			}
-		}
-	}
+    /*
+    Validates the input for any entered quantity of items
+    */
+    public static int quantityInputValidation(Scanner input, String question, int value1) {
+        int userInput = 0;
+        while (true) {
+            System.out.printf(question);
+            try {
+                userInput = input.nextInt();
+            } catch (InputMismatchException e) {
+                input.nextLine();
+                System.out.println("!!  Error: Enter a positive integer  !!");
+            }
+            if (userInput >= value1) {
+                return userInput;
+            }
+        }
+    }
 
     /*
 
